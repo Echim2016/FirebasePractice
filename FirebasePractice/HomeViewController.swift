@@ -49,6 +49,7 @@ class HomeViewController: UIViewController {
         
         addDocument(document: document)
         showAlert()
+        resetTextField()
     }
     
 
@@ -66,32 +67,6 @@ extension HomeViewController {
                 } else {
                     
                     self.readDocument()
-                    
-//                    if documentSnapshot?.documentChanges.count ?? 0 > 0 {
-//                        print("New document updated...")
-//                        
-//                        
-//                        documentSnapshot?.documentChanges.forEach {
-//
-//                            guard let id = $0.document.get("id") as? String,
-//                                  !id.isEmpty ,
-//                                  let title = $0.document.get("title"),
-//                                  let content = $0.document.get("content"),
-//                                  let time = $0.document.get("created_time"),
-//                                  let author = $0.document.get("author_id") else {
-//                                print("Can't get latest document")
-//                                return
-//                            }
-//
-//                            print("ID: \(id)")
-//                            print("Title: \(title)")
-//                            print("Content: \(content)")
-//                            print("Author: \(author)")
-//                            print("Created Time: \(time)")
-//                        }
-//                        
-//                        print("---end---")
-//                    }
                 }
             }
     }
@@ -101,10 +76,18 @@ extension HomeViewController {
 extension HomeViewController {
     
     func showAlert() {
+        
         let controller = UIAlertController(title: "Success!", message: "成功發布新文章！", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         controller.addAction(okAction)
         present(controller, animated: true, completion: nil)
+    }
+    
+    func resetTextField() {
+        
+        titleTextField.text = ""
+        contentTextField.text = ""
+        tagTextField.text = Tag.beauty.title
     }
     
 }
