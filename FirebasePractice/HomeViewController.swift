@@ -8,9 +8,7 @@
 import UIKit
 import Firebase
 
-
 class HomeViewController: UIViewController {
-    
     
     @IBOutlet weak var titleTextField: UITextField! {
         didSet {
@@ -53,6 +51,7 @@ class HomeViewController: UIViewController {
         document.id = "ios-1-\(documentID)"
         documentID += 1
         addDocument(document: document)
+        showAlert()
     }
     
 
@@ -74,7 +73,6 @@ extension HomeViewController {
                         
                         documentSnapshot?.documentChanges.forEach {
                             
-                            
                             guard let id = $0.document.get("id"),
                                   let title = $0.document.get("title"),
                                   let content = $0.document.get("content"),
@@ -94,6 +92,17 @@ extension HomeViewController {
                 }
                 
             }
+    }
+    
+}
+
+extension HomeViewController {
+    
+    func showAlert() {
+        let controller = UIAlertController(title: "Success Published!", message: "成功送出新文章！", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        controller.addAction(okAction)
+        present(controller, animated: true, completion: nil)
     }
     
 }
@@ -130,7 +139,6 @@ extension HomeViewController {
                     print("\(document.documentID) => \(document.data())")
                 }
                 print("-----end-----")
-
             }
         }
     }
@@ -198,6 +206,7 @@ extension HomeViewController: UITextFieldDelegate {
 }
 
 extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
