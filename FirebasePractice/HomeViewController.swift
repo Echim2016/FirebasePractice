@@ -30,6 +30,8 @@ class HomeViewController: UIViewController {
         }
     }
     
+    let pickerView = UIPickerView()
+    
     let collectionName = "Documents"
     var documentID = 1
     var pickerSelectedIndex = 0
@@ -43,6 +45,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         document.tag = currentText
         setListener()
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
     
     @IBAction func pressPost(_ sender: Any) {
@@ -68,6 +72,7 @@ extension HomeViewController {
                 }
             }
     }
+    
     
 }
 
@@ -168,15 +173,12 @@ extension HomeViewController: UITextFieldDelegate {
     
     func initPickerView(touchAt sender: UITextField){
         
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
         // set default selected row of pickerViw
         let currentText = tagTextField.text
-        pickerSelectedIndex = Tag.allCases.filter{$0.title == currentText}.first!.rawValue
+        pickerSelectedIndex = Tag.allCases.filter{$0.title == currentText}.first?.rawValue ?? 0
         pickerView.selectRow(pickerSelectedIndex, inComponent: 0, animated: true)
         
+        tagTextField.keyboardToolbar.isHidden = true
         tagTextField.inputView = pickerView
         tagTextField.becomeFirstResponder()
     }
@@ -198,8 +200,10 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      
+      print(row)
         tagTextField.text = Tag.allCases[row].title
+        self.view.endEditing(true)
+//        currentText = Tag.allCases[row].title
     }
     
 }
