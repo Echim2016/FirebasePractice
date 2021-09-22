@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
         resetTextField()
     }
     
-
 }
 
 extension HomeViewController {
@@ -65,7 +64,6 @@ extension HomeViewController {
                 if let error = error {
                     print(error)
                 } else {
-                    
                     self.readDocument()
                 }
             }
@@ -133,6 +131,7 @@ extension HomeViewController {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
+                    
                     print("\(document.documentID) => \(document.data())")
                 }
                 print("-----end-----")
