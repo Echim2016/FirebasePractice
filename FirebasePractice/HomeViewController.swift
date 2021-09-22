@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func pressPost(_ sender: Any) {
         
-        addDocument(document: document)
+        setDocument(document: document)
         showAlert()
         resetTextField()
     }
@@ -92,18 +92,17 @@ extension HomeViewController {
 
 extension HomeViewController {
     
-    func addDocument(document: Document) {
-        // Add a new document with a generated ID
-        var ref: DocumentReference? = nil
-        ref = db.collection(collectionName).addDocument(data: [
-            "id": document.id,
+    
+    func setDocument(document: Document) {
+        
+        let ref = db.collection(collectionName).document()
+        ref.setData([
+            "id": ref.documentID,
             "title": document.title,
             "content": document.content,
             "tag": document.tag,
             "author_id": document.authorID,
             "created_time": NSDate()
-//            "created_time": FieldValue.serverTimestamp()
-
             
         ]) { err in
             if let err = err {
@@ -113,15 +112,6 @@ extension HomeViewController {
             }
         }
         
-        ref?.updateData([
-            "id" : ref?.documentID
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
     }
     
     func readDocument() {
@@ -145,7 +135,8 @@ extension HomeViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard let text = textField.text else {
+        guard let text = textField.text,
+              !text.isEmpty else {
             print("empty input")
             return
         }
