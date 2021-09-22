@@ -33,34 +33,69 @@ class HomeViewController: UIViewController {
     }
     
     let collectionName = "Documents"
-    let authorID = "ios-1"
     var documentID = 1
     var pickerSelectedIndex = 0
     let currentText = Tag.beauty.title
     
-    var document = Document.init(id: "", title: "", content: "", tag: "", authorID: "", created_time: "")
+    var document = Document.init(id: "", title: "", content: "", tag: "", authorID: "ios-1", created_time: "")
     
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        document.authorID = authorID
-        
-        readDocument()
+        document.tag = currentText
+        setListener()
     }
     
     @IBAction func pressPost(_ sender: Any) {
         
         document.created_time = getCurrentTime()
-        
         document.id = "ios-1-\(documentID)"
         documentID += 1
-        
         addDocument(document: document)
-        
     }
     
 
+}
+
+extension HomeViewController {
+    
+    func setListener() {
+        // Listen to document metadata.
+        db.collection("Documents")
+            .addSnapshotListener(includeMetadataChanges: true) { documentSnapshot, error in
+                
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    if documentSnapshot?.documentChanges.count ?? 0 > 0 {
+                        print("New document updated...")
+                        
+                        documentSnapshot?.documentChanges.forEach {
+                            
+                            
+                            guard let id = $0.document.get("id"),
+                                  let title = $0.document.get("title"),
+                                  let content = $0.document.get("content"),
+                                  let time = $0.document.get("created_time"),
+                                  let author = $0.document.get("author_id") else {
+                                print("Can't get latest document")
+                                return
+                            }
+                            
+                            print("ID: \(id)")
+                            print("Title: \(title)")
+                            print("Content: \(content)")
+                            print("Author: \(author)")
+                            print("Created Time: \(time)")
+                        }
+                    }
+                }
+                
+            }
+    }
+    
 }
 
 extension HomeViewController {
@@ -80,12 +115,13 @@ extension HomeViewController {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+//                print("Document added with ID: \(ref!.documentID)")
             }
         }
     }
     
     func readDocument() {
+        
         db.collection(collectionName).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -93,6 +129,8 @@ extension HomeViewController {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                 }
+                print("-----end-----")
+
             }
         }
     }
@@ -105,8 +143,7 @@ extension HomeViewController {
         
         return format.string(from: date)
     }
-    
-    
+
 }
 
 extension HomeViewController: UITextFieldDelegate {
@@ -131,6 +168,7 @@ extension HomeViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         if textField.accessibilityLabel == "tag" {
             self.initPickerView(touchAt: textField)
         }
