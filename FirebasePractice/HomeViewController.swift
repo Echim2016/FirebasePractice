@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
     var pickerSelectedIndex = 0
     let currentText = Tag.beauty.title
     
-    var document = Document.init(id: "", title: "", content: "", tag: "", authorID: "ios-1", created_time: "")
+    var document = Document.init(id: "", title: "", content: "", tag: "", authorID: "ios-1", createdTime: nil)
     
     let db = Firestore.firestore()
     
@@ -47,9 +47,6 @@ class HomeViewController: UIViewController {
     
     @IBAction func pressPost(_ sender: Any) {
         
-        document.created_time = getCurrentTime()
-        document.id = "ios-1-\(documentID)"
-        documentID += 1
         addDocument(document: document)
         showAlert()
     }
@@ -68,29 +65,34 @@ extension HomeViewController {
                     print(error)
                 } else {
                     
-                    if documentSnapshot?.documentChanges.count ?? 0 > 0 {
-                        print("New document updated...")
-                        
-                        documentSnapshot?.documentChanges.forEach {
-                            
-                            guard let id = $0.document.get("id"),
-                                  let title = $0.document.get("title"),
-                                  let content = $0.document.get("content"),
-                                  let time = $0.document.get("created_time"),
-                                  let author = $0.document.get("author_id") else {
-                                print("Can't get latest document")
-                                return
-                            }
-                            
-                            print("ID: \(id)")
-                            print("Title: \(title)")
-                            print("Content: \(content)")
-                            print("Author: \(author)")
-                            print("Created Time: \(time)")
-                        }
-                    }
+                    self.readDocument()
+                    
+//                    if documentSnapshot?.documentChanges.count ?? 0 > 0 {
+//                        print("New document updated...")
+//                        
+//                        
+//                        documentSnapshot?.documentChanges.forEach {
+//
+//                            guard let id = $0.document.get("id") as? String,
+//                                  !id.isEmpty ,
+//                                  let title = $0.document.get("title"),
+//                                  let content = $0.document.get("content"),
+//                                  let time = $0.document.get("created_time"),
+//                                  let author = $0.document.get("author_id") else {
+//                                print("Can't get latest document")
+//                                return
+//                            }
+//
+//                            print("ID: \(id)")
+//                            print("Title: \(title)")
+//                            print("Content: \(content)")
+//                            print("Author: \(author)")
+//                            print("Created Time: \(time)")
+//                        }
+//                        
+//                        print("---end---")
+//                    }
                 }
-                
             }
     }
     
@@ -99,7 +101,7 @@ extension HomeViewController {
 extension HomeViewController {
     
     func showAlert() {
-        let controller = UIAlertController(title: "Success Published!", message: "成功送出新文章！", preferredStyle: .alert)
+        let controller = UIAlertController(title: "Success!", message: "成功發布新文章！", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         controller.addAction(okAction)
         present(controller, animated: true, completion: nil)
@@ -118,13 +120,25 @@ extension HomeViewController {
             "content": document.content,
             "tag": document.tag,
             "author_id": document.authorID,
-            "created_time": document.created_time
+            "created_time": NSDate()
+//            "created_time": FieldValue.serverTimestamp()
+
             
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
 //                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        
+        ref?.updateData([
+            "id" : ref?.documentID
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
             }
         }
     }
@@ -141,15 +155,6 @@ extension HomeViewController {
                 print("-----end-----")
             }
         }
-    }
-    
-    func getCurrentTime() -> String {
-        
-        let date = Date()
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        return format.string(from: date)
     }
 
 }

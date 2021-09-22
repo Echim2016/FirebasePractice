@@ -14,6 +14,6 @@ struct Document {
     var content: String
     var tag: String
     var authorID: String
-    var created_time: String
+    var createdTime: NSDate?
     
 }
