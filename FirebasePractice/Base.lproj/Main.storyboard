@@ -177,22 +177,31 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21R-B4-esM">
-                                                    <rect key="frame" x="348" y="25" width="46" height="30"/>
+                                                    <rect key="frame" x="348" y="8" width="46" height="30"/>
                                                     <state key="normal" title="加好友"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0q5-15-Xaz">
+                                                    <rect key="frame" x="332" y="46" width="62" height="30"/>
+                                                    <state key="normal" title="確認好友">
+                                                        <color key="titleColor" red="0.96078431369999995" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="rw2-tp-ScR" firstAttribute="leading" secondItem="pOG-DM-54u" secondAttribute="leading" constant="20" id="12N-5m-jzs"/>
+                                                <constraint firstItem="0q5-15-Xaz" firstAttribute="top" secondItem="21R-B4-esM" secondAttribute="bottom" constant="8" symbolic="YES" id="I8J-Y3-EE8"/>
                                                 <constraint firstItem="cfh-gr-3QU" firstAttribute="top" secondItem="pOG-DM-54u" secondAttribute="top" constant="8" id="PP8-ch-33o"/>
                                                 <constraint firstAttribute="trailing" secondItem="21R-B4-esM" secondAttribute="trailing" constant="20" id="Zx6-Mq-bmp"/>
-                                                <constraint firstItem="21R-B4-esM" firstAttribute="centerY" secondItem="pOG-DM-54u" secondAttribute="centerY" id="qPh-FH-SY3"/>
+                                                <constraint firstAttribute="trailing" secondItem="0q5-15-Xaz" secondAttribute="trailing" constant="20" id="gKL-hI-fVy"/>
                                                 <constraint firstItem="cfh-gr-3QU" firstAttribute="leading" secondItem="pOG-DM-54u" secondAttribute="leading" constant="20" id="uKQ-CS-fuS"/>
                                                 <constraint firstItem="rw2-tp-ScR" firstAttribute="top" secondItem="cfh-gr-3QU" secondAttribute="bottom" constant="10" id="vgh-fk-TAU"/>
+                                                <constraint firstItem="21R-B4-esM" firstAttribute="top" secondItem="pOG-DM-54u" secondAttribute="top" constant="8" id="zhw-hj-koY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addFriend" destination="21R-B4-esM" id="TZm-dI-fMp"/>
+                                            <outlet property="confirmFriendBtn" destination="0q5-15-Xaz" id="66D-jJ-c4h"/>
                                             <outlet property="emailLabel" destination="rw2-tp-ScR" id="4r5-Ez-Bnx"/>
                                             <outlet property="nameLabel" destination="cfh-gr-3QU" id="8PZ-GO-YdS"/>
                                         </connections>

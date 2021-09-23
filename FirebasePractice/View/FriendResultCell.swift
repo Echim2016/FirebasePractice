@@ -12,6 +12,7 @@ class FriendResultCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var addFriend: UIButton!
+    @IBOutlet weak var confirmFriendBtn: UIButton!
     
     func setCell(name: String, email: String) {
         nameLabel.text = name

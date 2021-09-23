@@ -39,6 +39,8 @@ class FriendsViewController: UIViewController {
         tableVIew.delegate = self
         tableVIew.dataSource = self
         
+        setListener()
+        
         tableVIew.tableHeaderView?.isHidden = false
 //        let searchController = UISearchController()
 //        navigationItem.searchController = searchController
@@ -110,6 +112,8 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
        print("call")
         print(invitationList[0])
         
+        cell.confirmFriendBtn.isHidden = true
+        
         switch selectedIndex {
         case 0:
             cell.emailLabel.isHidden = false
@@ -120,6 +124,9 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = invitationList[indexPath.row]
             cell.emailLabel.isHidden = true
             cell.addFriend.isHidden = true
+            
+            cell.confirmFriendBtn.isHidden = false
+            cell.confirmFriendBtn.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         case 2:
             cell.nameLabel.text = "test"
             cell.emailLabel.isHidden = false
@@ -136,6 +143,11 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func pressAddFriend(_ sender: UIButton) {
         
         addFriendRequst()
+    }
+    
+    @objc func pressConfirm(_ sender: UIButton) {
+        
+        resetRequest()
     }
     
 }
@@ -207,14 +219,76 @@ extension FriendsViewController {
                     
                 }
                 
-                print(self.invitationList)
+//                print(self.invitationList)
                 self.tableVIew.reloadData()
                 
             }
         }
-       
-      
+    }
     
+    func setListener() {
+        // Listen to document metadata.
+        db.collection("Request")
+            .addSnapshotListener(includeMetadataChanges: true) { documentSnapshot, error in
+                
+                if let error = error {
+                    print(error)
+                } else {
+                    guard let ref = documentSnapshot?.documentChanges,
+                          ref.count > 0,
+                          let myInvitation = ref[0].document.get("to") as? String,
+                          let from = ref[0].document.get("from") as? String,
+                          let accepted = ref[0].document.get("accepted") as? Bool else {
+                        print("can't get 'to' ")
+                        return
+                    }
+
+                    if myInvitation == self.ownerEmail && accepted == false {
+                        print("\(self.ownerEmail) recieved a invitation from \(from)")
+                    }
+                    
+                }
+            }
+    }
+    
+    func resetRequest() {
+        
+        
+        invitationList.forEach { newFriend in
+            
+            db.collection("Request").whereField("from", isEqualTo: newFriend).getDocuments {
+                (querySnapshot, error) in
+                if let querySnapshot = querySnapshot {
+                    for document in querySnapshot.documents {
+                        
+//                        guard let from = document.get("from") as? String else {
+//                            print()
+//                            return
+//                        }
+                        
+                        let ref = self.db.collection("Request").document(document.documentID)
+                        
+                        ref.updateData([
+                            "accepted" : true
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating accpeted request: \(err)")
+                            } else {
+                                print("Accepted successfully updated")
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+        
+        invitationList = []
+        self.tableVIew.reloadData()
+
+        
+        
         
     }
     

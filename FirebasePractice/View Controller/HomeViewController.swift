@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     
     let pickerView = UIPickerView()
     
-    let collectionName = "Documents"
+    let collectionName = "Articles"
     var documentID = 1
     var pickerSelectedIndex = 0
     let currentText = Tag.beauty.title
@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         document.tag = currentText
-        setListener()
+//        setListener()
         pickerView.delegate = self
         pickerView.dataSource = self
     }
@@ -62,7 +62,7 @@ extension HomeViewController {
     
     func setListener() {
         // Listen to document metadata.
-        db.collection("Documents")
+        db.collection("Articles")
             .addSnapshotListener(includeMetadataChanges: true) { documentSnapshot, error in
                 
                 if let error = error {
