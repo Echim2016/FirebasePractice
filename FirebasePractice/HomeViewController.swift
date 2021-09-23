@@ -200,7 +200,7 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      print(row)
+        
         tagTextField.text = Tag.allCases[row].title
         self.view.endEditing(true)
     }
