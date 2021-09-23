@@ -121,7 +121,7 @@ extension HomeViewController {
     
     func readDocument() {
         
-        db.collection(collectionName).getDocuments() { (querySnapshot, err) in
+        db.collection(collectionName).order(by: "created_time").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -203,7 +203,6 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
       print(row)
         tagTextField.text = Tag.allCases[row].title
         self.view.endEditing(true)
-//        currentText = Tag.allCases[row].title
     }
     
 }
