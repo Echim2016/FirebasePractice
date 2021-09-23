@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Jv-DX-HqH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d45-7R-Orh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -124,7 +124,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Ma-YM1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Ma-YM1">
                                 <rect key="frame" x="0.0" y="31" width="414" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="igZ-O2-u2h">
@@ -146,7 +146,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
                                     <constraints>
                                         <constraint firstItem="G0g-so-dbQ" firstAttribute="top" secondItem="igZ-O2-u2h" secondAttribute="top" constant="3" id="FO3-c3-xZj"/>
                                         <constraint firstItem="G0g-so-dbQ" firstAttribute="leading" secondItem="igZ-O2-u2h" secondAttribute="leading" constant="16" id="RAF-pp-40F"/>
@@ -157,14 +157,45 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="n5i-yk-Btr">
-                                        <rect key="frame" x="0.0" y="68.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendResultCell" id="n5i-yk-Btr" customClass="FriendResultCell" customModule="FirebasePractice" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n5i-yk-Btr" id="pOG-DM-54u">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfh-gr-3QU">
+                                                    <rect key="frame" x="20" y="8" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-tp-ScR">
+                                                    <rect key="frame" x="20" y="39" width="41" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21R-B4-esM">
+                                                    <rect key="frame" x="348" y="25" width="46" height="30"/>
+                                                    <state key="normal" title="加好友"/>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="rw2-tp-ScR" firstAttribute="leading" secondItem="pOG-DM-54u" secondAttribute="leading" constant="20" id="12N-5m-jzs"/>
+                                                <constraint firstItem="cfh-gr-3QU" firstAttribute="top" secondItem="pOG-DM-54u" secondAttribute="top" constant="8" id="PP8-ch-33o"/>
+                                                <constraint firstAttribute="trailing" secondItem="21R-B4-esM" secondAttribute="trailing" constant="20" id="Zx6-Mq-bmp"/>
+                                                <constraint firstItem="21R-B4-esM" firstAttribute="centerY" secondItem="pOG-DM-54u" secondAttribute="centerY" id="qPh-FH-SY3"/>
+                                                <constraint firstItem="cfh-gr-3QU" firstAttribute="leading" secondItem="pOG-DM-54u" secondAttribute="leading" constant="20" id="uKQ-CS-fuS"/>
+                                                <constraint firstItem="rw2-tp-ScR" firstAttribute="top" secondItem="cfh-gr-3QU" secondAttribute="bottom" constant="10" id="vgh-fk-TAU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addFriend" destination="21R-B4-esM" id="TZm-dI-fMp"/>
+                                            <outlet property="emailLabel" destination="rw2-tp-ScR" id="4r5-Ez-Bnx"/>
+                                            <outlet property="nameLabel" destination="cfh-gr-3QU" id="8PZ-GO-YdS"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -175,6 +206,9 @@
                                     <segment title="朋友邀請"/>
                                     <segment title="所有朋友"/>
                                 </segments>
+                                <connections>
+                                    <action selector="changeSegment:" destination="hMZ-x7-lem" eventType="valueChanged" id="JYw-HA-xMb"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EiY-Gf-kg5"/>
@@ -195,6 +229,7 @@
                     <connections>
                         <outlet property="searchButton" destination="ih0-zg-fnE" id="5q0-iv-MGA"/>
                         <outlet property="searchTextField" destination="G0g-so-dbQ" id="I5K-Vy-whL"/>
+                        <outlet property="segmentedController" destination="lIR-uI-w9u" id="ifJ-Cc-kCl"/>
                         <outlet property="tableVIew" destination="cCZ-Ma-YM1" id="DUc-K8-Rr2"/>
                     </connections>
                 </viewController>
@@ -386,6 +421,9 @@
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

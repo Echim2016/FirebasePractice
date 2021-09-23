@@ -70,6 +70,7 @@ extension LoginViewController {
     
     func findUserEmail(completion: @escaping (Bool) -> Void) {
         
+        
         userHasAccount = false
         
         db.collection(Collection.users.title).whereField(Users.email.field, isEqualTo: loginEmail).getDocuments {

@@ -43,3 +43,25 @@ enum Users: CaseIterable {
     }
     
 }
+
+enum Friends: CaseIterable {
+    
+    
+    case userID
+    case friendList
+    case invitationList
+    
+    var field: String {
+        
+        switch self {
+        case .userID:
+            return "user_id"
+        case .friendList:
+            return "friend_list"
+        case .invitationList:
+            return "invitation_list"
+        }
+        
+    }
+    
+}
