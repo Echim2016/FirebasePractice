@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Post-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkY-yJ-LV3">
-                                <rect key="frame" x="57" y="508" width="300" height="36"/>
+                                <rect key="frame" x="57" y="452" width="300" height="36"/>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Post">
@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="otx-YK-ToV">
-                                <rect key="frame" x="57" y="206" width="300" height="272"/>
+                                <rect key="frame" x="57" y="150" width="300" height="272"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="biB-ZF-IHJ">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
@@ -104,6 +104,7 @@
                             <constraint firstItem="otx-YK-ToV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="zSh-Yq-AvG"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Post" image="square.and.pencil" catalog="system" id="dUm-Ak-nlV"/>
                     <navigationItem key="navigationItem" id="htf-wo-JeW"/>
                     <connections>
                         <outlet property="contentTextField" destination="hjf-yJ-l4G" id="6cL-NL-9zO"/>
@@ -115,22 +116,46 @@
             </objects>
             <point key="canvasLocation" x="2033" y="88"/>
         </scene>
-        <!--View Controller-->
+        <!--Friends-->
         <scene sceneID="9n3-Tp-1hd">
             <objects>
-                <viewController id="hMZ-x7-lem" sceneMemberID="viewController">
+                <viewController id="hMZ-x7-lem" customClass="FriendsViewController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q4I-9h-g2l">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Ma-YM1">
-                                <rect key="frame" x="0.0" y="87" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="31" width="414" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="V1d-Fm-Irn">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="igZ-O2-u2h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0g-so-dbQ">
+                                            <rect key="frame" x="16" y="3" width="318" height="38"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ih0-zg-fnE">
+                                            <rect key="frame" x="354" y="7" width="31" height="30"/>
+                                            <state key="normal" title="搜尋">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="pressSearchButton:" destination="hMZ-x7-lem" eventType="touchUpInside" id="MoJ-is-Hjo"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                    <constraints>
+                                        <constraint firstItem="G0g-so-dbQ" firstAttribute="top" secondItem="igZ-O2-u2h" secondAttribute="top" constant="3" id="FO3-c3-xZj"/>
+                                        <constraint firstItem="G0g-so-dbQ" firstAttribute="leading" secondItem="igZ-O2-u2h" secondAttribute="leading" constant="16" id="RAF-pp-40F"/>
+                                        <constraint firstItem="ih0-zg-fnE" firstAttribute="leading" secondItem="G0g-so-dbQ" secondAttribute="trailing" constant="20" id="afY-w9-ZE4"/>
+                                        <constraint firstItem="ih0-zg-fnE" firstAttribute="centerY" secondItem="igZ-O2-u2h" secondAttribute="centerY" id="ejx-MY-AHo"/>
+                                        <constraint firstAttribute="trailing" secondItem="G0g-so-dbQ" secondAttribute="trailing" constant="80" id="mM9-WW-dba"/>
+                                        <constraint firstAttribute="bottom" secondItem="G0g-so-dbQ" secondAttribute="bottom" constant="3" id="vZ1-4e-b6z"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="n5i-yk-Btr">
                                         <rect key="frame" x="0.0" y="68.5" width="414" height="43.5"/>
@@ -138,12 +163,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n5i-yk-Btr" id="pOG-DM-54u">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lIR-uI-w9u">
-                                <rect key="frame" x="0.0" y="56" width="414" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
                                 <segments>
                                     <segment title="搜尋朋友"/>
                                     <segment title="朋友邀請"/>
@@ -164,30 +190,17 @@
                             <constraint firstItem="EiY-Gf-kg5" firstAttribute="trailing" secondItem="lIR-uI-w9u" secondAttribute="trailing" id="xCd-lh-bU4"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Friends" image="person.fill" catalog="system" id="NMc-UG-ni4"/>
                     <navigationItem key="navigationItem" id="FKs-ju-fgA"/>
+                    <connections>
+                        <outlet property="searchButton" destination="ih0-zg-fnE" id="5q0-iv-MGA"/>
+                        <outlet property="searchTextField" destination="G0g-so-dbQ" id="I5K-Vy-whL"/>
+                        <outlet property="tableVIew" destination="cCZ-Ma-YM1" id="DUc-K8-Rr2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEF-07-EEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2031.8840579710147" y="820.98214285714278"/>
-        </scene>
-        <!--Post-->
-        <scene sceneID="D7u-R5-B71">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pNg-1r-nkb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Post" image="square.and.pencil" catalog="system" id="dIF-Qr-2X4"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="meX-gD-cJl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="V57-KK-shv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z7X-on-vNY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1002.8985507246377" y="88.392857142857139"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="6Yo-kK-NqH">
@@ -249,7 +262,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="PEW-bC-lmF" id="A6p-WX-ZYK"/>
                         <segue destination="aqS-A8-Fve" kind="show" identifier="toSignUp" id="DmK-PB-JbW"/>
-                        <segue destination="d45-7R-Orh" kind="show" identifier="loginSuccess" id="DP9-qa-q8z"/>
+                        <segue destination="d45-7R-Orh" kind="presentation" identifier="loginSuccess" id="DP9-qa-q8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPh-Wi-E5E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -338,7 +351,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="eeV-uu-TRZ" id="Uhg-9S-QHb"/>
                         <outlet property="nameTextField" destination="qKs-Ye-RlE" id="bRp-Lt-P4T"/>
-                        <segue destination="d45-7R-Orh" kind="show" identifier="signUpSuccess" id="2L7-i9-l6M"/>
+                        <segue destination="d45-7R-Orh" kind="presentation" identifier="signUpSuccess" id="2L7-i9-l6M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeV-Zu-kKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -348,7 +361,8 @@
         <!--Tab Bar Controller-->
         <scene sceneID="78m-CB-oHF">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="d45-7R-Orh" customClass="TabBarController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JV3-Go-BEH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="d45-7R-Orh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jaa-vE-6gs"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Jt-oK-h0k">
@@ -356,32 +370,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="pNg-1r-nkb" kind="relationship" relationship="viewControllers" id="pEE-fY-Cld"/>
-                        <segue destination="UYa-OY-xtp" kind="relationship" relationship="viewControllers" id="b1H-Ry-sR1"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="f5X-Sj-LSO"/>
+                        <segue destination="hMZ-x7-lem" kind="relationship" relationship="viewControllers" id="hVY-vT-iRB"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JV3-Go-BEH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="92.753623188405811" y="88.392857142857139"/>
-        </scene>
-        <!--Friends-->
-        <scene sceneID="ZA8-l6-x9F">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UYa-OY-xtp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" image="person.fill" catalog="system" id="ygw-qP-WNY"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VZB-ET-eiA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="hMZ-x7-lem" kind="relationship" relationship="rootViewController" id="5Xw-Rg-3xf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V0I-LP-Pzy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1003" y="821"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

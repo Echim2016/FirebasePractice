@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let homeVC = segue.destination as? TabBarController {
+        if let homeVC = segue.destination as? UITabBarController {
             homeVC.modalPresentationStyle = .fullScreen
         }
     }

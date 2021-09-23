@@ -178,7 +178,7 @@ extension HomeViewController: UITextFieldDelegate {
         pickerSelectedIndex = Tag.allCases.filter{$0.title == currentText}.first?.rawValue ?? 0
         pickerView.selectRow(pickerSelectedIndex, inComponent: 0, animated: true)
         
-        tagTextField.keyboardToolbar.isHidden = true
+        
         tagTextField.inputView = pickerView
         tagTextField.becomeFirstResponder()
     }
