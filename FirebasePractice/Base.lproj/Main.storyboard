@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkY-yJ-LV3">
-                                <rect key="frame" x="57" y="540" width="300" height="36"/>
+                                <rect key="frame" x="57" y="508" width="300" height="36"/>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Post">
@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="otx-YK-ToV">
-                                <rect key="frame" x="57" y="238" width="300" height="272"/>
+                                <rect key="frame" x="57" y="206" width="300" height="272"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="biB-ZF-IHJ">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
@@ -122,7 +122,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="dIF-Qr-2X4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="meX-gD-cJl">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -134,10 +134,10 @@
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="88.392857142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="6Yo-kK-NqH">
             <objects>
-                <viewController id="9Jv-DX-HqH" sceneMemberID="viewController">
+                <viewController id="9Jv-DX-HqH" customClass="LoginViewController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j3O-w5-4U9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,6 +174,9 @@
                                 <state key="normal" title="登入">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressLogin:" destination="9Jv-DX-HqH" eventType="touchUpInside" id="OUh-nA-FgS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="plg-lh-zZ3"/>
@@ -189,30 +192,31 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="aqS-A8-Fve" kind="custom" identifier="toSignUp" id="DmK-PB-JbW"/>
-                        <segue destination="d45-7R-Orh" kind="custom" identifier="loginSucess" id="DP9-qa-q8z"/>
+                        <outlet property="emailTextField" destination="PEW-bC-lmF" id="A6p-WX-ZYK"/>
+                        <segue destination="aqS-A8-Fve" kind="show" identifier="toSignUp" id="DmK-PB-JbW"/>
+                        <segue destination="d45-7R-Orh" kind="show" identifier="loginSuccess" id="DP9-qa-q8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPh-Wi-E5E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="92.753623188405811" y="-697.09821428571422"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="z4X-RZ-DQT">
             <objects>
-                <viewController id="aqS-A8-Fve" sceneMemberID="viewController">
+                <viewController id="aqS-A8-Fve" customClass="SignUpViewController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fql-JY-2oX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bg-aT-eX5">
-                                <rect key="frame" x="126" y="224" width="162.5" height="57.5"/>
+                                <rect key="frame" x="126" y="180" width="162.5" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-hJ-404" userLabel="email">
-                                <rect key="frame" x="64.5" y="431.5" width="285.5" height="34"/>
+                                <rect key="frame" x="64.5" y="387.5" width="285.5" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電子郵件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfP-9a-9QG">
                                         <rect key="frame" x="0.0" y="0.0" width="69.5" height="34"/>
@@ -231,7 +235,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vj1-6X-h9z" userLabel="Name">
-                                <rect key="frame" x="64.5" y="490.5" width="285.5" height="34"/>
+                                <rect key="frame" x="64.5" y="446.5" width="285.5" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-SY-uMH">
                                         <rect key="frame" x="0.0" y="0.0" width="69.5" height="34"/>
@@ -250,7 +254,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itn-Y8-s7g">
-                                <rect key="frame" x="64.5" y="604.5" width="285.5" height="34"/>
+                                <rect key="frame" x="64.5" y="560.5" width="285.5" height="34"/>
                                 <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="註冊會員">
@@ -272,6 +276,7 @@
                             <constraint firstItem="itn-Y8-s7g" firstAttribute="width" secondItem="vj1-6X-h9z" secondAttribute="width" id="wkR-R5-phd"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5cs-bO-2Qy"/>
                     <connections>
                         <segue destination="d45-7R-Orh" kind="custom" identifier="signUpSuccess" id="2L7-i9-l6M"/>
                     </connections>
@@ -283,7 +288,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="78m-CB-oHF">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="d45-7R-Orh" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="d45-7R-Orh" customClass="TabBarController" customModule="FirebasePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jaa-vE-6gs"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Jt-oK-h0k">
@@ -300,7 +305,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2L7-i9-l6M"/>
+        <segue reference="DP9-qa-q8z"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

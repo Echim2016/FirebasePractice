@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		02C2047442704452F3D1B01F /* Pods_FirebasePractice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0392E023C944011A9120CD93 /* Pods_FirebasePractice.framework */; };
+		9C5FDEDF26FC465A002E498E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEDE26FC465A002E498E /* LoginViewController.swift */; };
+		9C5FDEE126FC4671002E498E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE026FC4671002E498E /* SignUpViewController.swift */; };
+		9C5FDEE326FC4FD6002E498E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE226FC4FD6002E498E /* TabBarController.swift */; };
+		9C5FDEE526FC512D002E498E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE426FC512D002E498E /* Collection.swift */; };
 		9C75219226FAFEEB00D76F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C75219126FAFEEB00D76F79 /* AppDelegate.swift */; };
 		9C75219426FAFEEB00D76F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C75219326FAFEEB00D76F79 /* SceneDelegate.swift */; };
 		9C75219926FAFEEB00D76F79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C75219726FAFEEB00D76F79 /* Main.storyboard */; };
@@ -22,6 +26,10 @@
 /* Begin PBXFileReference section */
 		0392E023C944011A9120CD93 /* Pods_FirebasePractice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebasePractice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8226DFC58FF07A5E45A3355B /* Pods-FirebasePractice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePractice.release.xcconfig"; path = "Target Support Files/Pods-FirebasePractice/Pods-FirebasePractice.release.xcconfig"; sourceTree = "<group>"; };
+		9C5FDEDE26FC465A002E498E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9C5FDEE026FC4671002E498E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9C5FDEE226FC4FD6002E498E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9C5FDEE426FC512D002E498E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		9C75218E26FAFEEB00D76F79 /* FirebasePractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebasePractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C75219126FAFEEB00D76F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C75219326FAFEEB00D76F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9C5FDEDD26FC4641002E498E /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9C82917E26FB06FC0005DC55 /* HomeViewController.swift */,
+				9C5FDEDE26FC465A002E498E /* LoginViewController.swift */,
+				9C5FDEE026FC4671002E498E /* SignUpViewController.swift */,
+				9C5FDEE226FC4FD6002E498E /* TabBarController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
 		9C75218526FAFEEB00D76F79 = {
 			isa = PBXGroup;
 			children = (
@@ -86,10 +105,10 @@
 		9C75219026FAFEEB00D76F79 /* FirebasePractice */ = {
 			isa = PBXGroup;
 			children = (
+				9C5FDEDD26FC4641002E498E /* View Controller */,
 				9C82918426FB0C3D0005DC55 /* Model */,
 				9C75219126FAFEEB00D76F79 /* AppDelegate.swift */,
 				9C75219326FAFEEB00D76F79 /* SceneDelegate.swift */,
-				9C82917E26FB06FC0005DC55 /* HomeViewController.swift */,
 				9C75219726FAFEEB00D76F79 /* Main.storyboard */,
 				9C75219A26FAFEEC00D76F79 /* Assets.xcassets */,
 				9C75219C26FAFEEC00D76F79 /* LaunchScreen.storyboard */,
@@ -104,6 +123,7 @@
 			children = (
 				9C82918026FB0AA90005DC55 /* Document.swift */,
 				9C82918226FB0C390005DC55 /* Tag.swift */,
+				9C5FDEE426FC512D002E498E /* Collection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -223,6 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C5FDEE526FC512D002E498E /* Collection.swift in Sources */,
+				9C5FDEDF26FC465A002E498E /* LoginViewController.swift in Sources */,
+				9C5FDEE326FC4FD6002E498E /* TabBarController.swift in Sources */,
+				9C5FDEE126FC4671002E498E /* SignUpViewController.swift in Sources */,
 				9C82918126FB0AA90005DC55 /* Document.swift in Sources */,
 				9C75219226FAFEEB00D76F79 /* AppDelegate.swift in Sources */,
 				9C82918326FB0C390005DC55 /* Tag.swift in Sources */,
