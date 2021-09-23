@@ -32,18 +32,20 @@ class LoginViewController: UIViewController {
             if hasAccount {
                 self.performSegue(withIdentifier: "loginSuccess", sender: nil)
             } else {
-                self.performSegue(withIdentifier: "toSignUp", sender: nil)
+                self.performSegue(withIdentifier: "toSignUp", sender: sender)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let homeVC = segue.destination as? TabBarController {
             homeVC.modalPresentationStyle = .fullScreen
         }
         
         if let signUpVC = segue.destination as? SignUpViewController {
             signUpVC.modalPresentationStyle = .fullScreen
+            signUpVC.defaultEmail = loginEmail
         }
     }
 

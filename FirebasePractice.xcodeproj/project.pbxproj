@@ -12,6 +12,7 @@
 		9C5FDEE126FC4671002E498E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE026FC4671002E498E /* SignUpViewController.swift */; };
 		9C5FDEE326FC4FD6002E498E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE226FC4FD6002E498E /* TabBarController.swift */; };
 		9C5FDEE526FC512D002E498E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE426FC512D002E498E /* Collection.swift */; };
+		9C5FDEE726FC5B82002E498E /* Alert+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FDEE626FC5B82002E498E /* Alert+extension.swift */; };
 		9C75219226FAFEEB00D76F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C75219126FAFEEB00D76F79 /* AppDelegate.swift */; };
 		9C75219426FAFEEB00D76F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C75219326FAFEEB00D76F79 /* SceneDelegate.swift */; };
 		9C75219926FAFEEB00D76F79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C75219726FAFEEB00D76F79 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		9C5FDEE026FC4671002E498E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9C5FDEE226FC4FD6002E498E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9C5FDEE426FC512D002E498E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		9C5FDEE626FC5B82002E498E /* Alert+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+extension.swift"; sourceTree = "<group>"; };
 		9C75218E26FAFEEB00D76F79 /* FirebasePractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebasePractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C75219126FAFEEB00D76F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C75219326FAFEEB00D76F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				9C75219C26FAFEEC00D76F79 /* LaunchScreen.storyboard */,
 				9C75219F26FAFEEC00D76F79 /* Info.plist */,
 				9C7521A526FB004500D76F79 /* GoogleService-Info.plist */,
+				9C5FDEE626FC5B82002E498E /* Alert+extension.swift */,
 			);
 			path = FirebasePractice;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				9C5FDEE526FC512D002E498E /* Collection.swift in Sources */,
 				9C5FDEDF26FC465A002E498E /* LoginViewController.swift in Sources */,
+				9C5FDEE726FC5B82002E498E /* Alert+extension.swift in Sources */,
 				9C5FDEE326FC4FD6002E498E /* TabBarController.swift in Sources */,
 				9C5FDEE126FC4671002E498E /* SignUpViewController.swift in Sources */,
 				9C82918126FB0AA90005DC55 /* Document.swift in Sources */,
