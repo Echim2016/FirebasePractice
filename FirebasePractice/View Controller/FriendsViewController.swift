@@ -46,6 +46,8 @@ class FriendsViewController: UIViewController {
         setListener()
         getMyFriendList { isGet in
             print(isGet)
+            print(self.myFriendList)
+            print(self.myFriendNameList)
         }
         tableVIew.tableHeaderView?.isHidden = false
     
@@ -53,11 +55,8 @@ class FriendsViewController: UIViewController {
     
     @IBAction func pressSearchButton(_ sender: Any) {
         
-        findUserEmail { emailIsFound in
-//            if emailIsFound {
+        findUserEmail { isGet in
                 self.tableVIew.reloadData()
-//            }
-            
         }
         
     }
@@ -109,7 +108,9 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return invitationList.count
         case 2:
+            print(myFriendList.count)
             return myFriendList.count
+            
         default:
             return 0
         }
@@ -127,7 +128,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedIndex {
         case 0:
             cell.emailLabel.isHidden = false
-//            cell.addFriend.isHidden = !isFriend
+            cell.addFriend.isHidden = false
             cell.setCell(name: users[indexPath.row].name, email: users[indexPath.row].email)
             cell.addFriend.addTarget(self, action: #selector(pressAddFriend(_:)), for: .touchUpInside)
         case 1:
@@ -138,9 +139,9 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.confirmFriendBtn.isHidden = false
             cell.confirmFriendBtn.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         case 2:
-            cell.nameLabel.text = myFriendNameList[indexPath.row]
+//            cell.nameLabel.text = myFriendNameList[indexPath.row]
             cell.emailLabel.text = myFriendList[indexPath.row]
-            cell.nameLabel.isHidden = false
+            cell.nameLabel.isHidden = true
             cell.emailLabel.isHidden = false
             cell.addFriend.isHidden = true
             
@@ -202,7 +203,6 @@ extension FriendsViewController {
                         break
                     } else {
                         
-                       
                         self.isFriend = false
                         
                         completion(true)
@@ -221,8 +221,7 @@ extension FriendsViewController {
         let ref = db.collection("Request").document()
         ref.setData([
             "to" : users.first?.email,
-            "from": ownerEmail,
-            "accepted" : false
+            "from": ownerEmail
         ]) { err in
             if let err = err {
                 print("Error updating request: \(err)")
@@ -237,6 +236,7 @@ extension FriendsViewController {
         
         invitationList = []
         
+        // 找所有給裝置主人的 request
         db.collection("Request").whereField("to", isEqualTo: ownerEmail).getDocuments {
             (querySnapshot, error) in
             if let querySnapshot = querySnapshot {
@@ -250,7 +250,6 @@ extension FriendsViewController {
                     self.invitationList.append(from)
                     
                 }
-                
 //                print(self.invitationList)
                 self.tableVIew.reloadData()
                 
@@ -270,13 +269,18 @@ extension FriendsViewController {
                           ref.count > 0,
                           let myInvitation = ref[0].document.get("to") as? String,
                           let from = ref[0].document.get("from") as? String else {
-//                        print("can't get 'to' ")
+                        print("can't get 'to' ")
                         return
                     }
 
                     if myInvitation == self.ownerEmail {
                         print("\(self.ownerEmail) recieved a invitation from \(from)")
+//                        self.invitationList.append(from)
                     }
+                    
+//                    self.tableVIew.reloadData()
+                    
+//                    self.getInvitations()
                     
                 }
             }
@@ -291,8 +295,9 @@ extension FriendsViewController {
         invitationList.forEach { newFriend in
             
             myFriendList.append(newFriend)
+            print(invitationList)
             
-            db.collection("Request").whereField("from", isEqualTo: newFriend).getDocuments {
+            db.collection("Request").whereField("to", isEqualTo: ownerEmail).getDocuments {
                 (querySnapshot, error) in
                 if let querySnapshot = querySnapshot {
                     for document in querySnapshot.documents {
@@ -377,6 +382,7 @@ extension FriendsViewController {
     func getMyFriendList(completion: @escaping (Bool) -> Void) {
         
         myFriendList = []
+//        myFriendNameList = []
         
         db.collection("Users").whereField("email", isEqualTo: ownerEmail).getDocuments  {
             (querySnapshot, error) in
@@ -389,31 +395,34 @@ extension FriendsViewController {
                     }
                     
                     self.myFriendList = oldFirendList
+                    
                     if self.myFriendList.first == "" {
                         self.myFriendList.removeFirst()
                     }
                     
-                    self.myFriendList.forEach {  myFriend in
-                        
-                        self.db.collection("Users").whereField("email", isEqualTo: myFriend).getDocuments  {
-                            (querySnapshot, error) in
-                            if let querySnapshot = querySnapshot {
-                                for document in querySnapshot.documents {
-                                    
-                                    guard let name = document.get("name") as? String else {
-                                        print("can't get my old friend list")
-                                        return
-                                    }
-                                    
-                                    self.myFriendNameList.append(name)
-                                    
-                                    
-                                }
-                                completion(true)
-                            }
-                        }
-                        
-                    }
+                    completion(true)
+                    
+//                    self.myFriendList.forEach {  myFriend in
+//
+//                        self.db.collection("Users").whereField("email", isEqualTo: myFriend).getDocuments  {
+//                            (querySnapshot, error) in
+//                            if let querySnapshot = querySnapshot {
+//                                for document in querySnapshot.documents {
+//
+//                                    guard let name = document.get("name") as? String else {
+//                                        print("can't get my old friend list")
+//                                        return
+//                                    }
+//
+//                                    self.myFriendNameList.append(name)
+//                                    print(self.myFriendList)
+//
+//                                }
+//                                completion(true)
+//                            }
+//                        }
+//
+//                    }
                     
                 }
                 
