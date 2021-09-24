@@ -82,7 +82,13 @@ class FriendsViewController: UIViewController {
         
     }
     
-    
+    func showAlert(title: String, message: String) {
+        
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        controller.addAction(okAction)
+        present(controller, animated: true, completion: nil)
+    }
 
     
 }
@@ -108,9 +114,6 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendResultCell", for: indexPath) as? FriendResultCell
         else { fatalError("Could not create FriendResultCell") }
-        
-       print("call")
-        print(invitationList[0])
         
         cell.confirmFriendBtn.isHidden = true
         
@@ -143,6 +146,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func pressAddFriend(_ sender: UIButton) {
         
         addFriendRequst()
+        
     }
     
     @objc func pressConfirm(_ sender: UIButton) {
@@ -196,6 +200,7 @@ extension FriendsViewController {
             if let err = err {
                 print("Error updating request: \(err)")
             } else {
+                self.showAlert(title: "Success!", message: "成功送出好友邀請")
                 print("Request successfully updated")
             }
         }
@@ -210,12 +215,15 @@ extension FriendsViewController {
             if let querySnapshot = querySnapshot {
                 for document in querySnapshot.documents {
                     
-                    guard let from = document.get("from") as? String else {
+                    guard let from = document.get("from") as? String,
+                          let acceptedState = document.get("accepted") as? Bool else {
                         print("can't get from person")
                         return
                     }
                     
-                    self.invitationList.append(from)
+                    if !acceptedState {
+                        self.invitationList.append(from)
+                    }
                     
                 }
                 
@@ -253,18 +261,13 @@ extension FriendsViewController {
     
     func resetRequest() {
         
-        
+        // 在全部同意好友邀請後，去Request池裡面找有送給我好友邀請的request，把每個request的accepted都改成true
         invitationList.forEach { newFriend in
             
             db.collection("Request").whereField("from", isEqualTo: newFriend).getDocuments {
                 (querySnapshot, error) in
                 if let querySnapshot = querySnapshot {
                     for document in querySnapshot.documents {
-                        
-//                        guard let from = document.get("from") as? String else {
-//                            print()
-//                            return
-//                        }
                         
                         let ref = self.db.collection("Request").document(document.documentID)
                         
@@ -278,15 +281,84 @@ extension FriendsViewController {
                             }
                         }
                     }
-                    
                 }
             }
+            
+            // 更新新朋友的朋友清單，把自己加進去
+            db.collection("Users").whereField("email", isEqualTo: newFriend).getDocuments  {
+                (querySnapshot, error) in
+                if let querySnapshot = querySnapshot {
+                    for document in querySnapshot.documents {
+                        
+                        guard let oldFirendList = document.get("friend_list") as? [String] else {
+                            print("can't get friend list")
+                            return
+                        }
+                        
+                        self.friendList = oldFirendList
+                        self.friendList.append(self.ownerEmail)
+                        if self.friendList.first == "" {
+                            self.friendList.removeFirst()
+                        }
+                        
+                        
+                        let ref = self.db.collection("Users").document(document.documentID)
+                        
+                        ref.updateData([
+                            "friend_list" : self.friendList
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating accpeted request: \(err)")
+                            } else {
+                                print("New friend's friend list successfully updated")
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            // 更新自己的朋友清單，把新朋友加進去
+            db.collection("Users").whereField("email", isEqualTo: ownerEmail).getDocuments  {
+                (querySnapshot, error) in
+                if let querySnapshot = querySnapshot {
+                    for document in querySnapshot.documents {
+                        
+                        guard let oldFirendList = document.get("friend_list") as? [String] else {
+                            print("can't get my old friend list")
+                            return
+                        }
+                        
+                        self.friendList = oldFirendList
+                        self.friendList.append(newFriend)
+                        if self.friendList.first == "" {
+                            self.friendList.removeFirst()
+                        }
+                        
+                        let ref = self.db.collection("Users").document(document.documentID)
+                        
+                        ref.updateData([
+                            "friend_list" : self.friendList
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating accpeted request: \(err)")
+                            } else {
+                                print("My new friend's friend list successfully updated")
+                            }
+                        }
+                    }
+                }
+            }
+            
             
         }
         
         invitationList = []
         self.tableVIew.reloadData()
-
+    }
+    
+    func updateFriendList() {
+        
         
         
         
