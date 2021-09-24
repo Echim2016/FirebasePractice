@@ -34,6 +34,8 @@ class FriendsViewController: UIViewController {
     var myFriendList: [String] = []
     var myFriendNameList: [String] = []
     
+    var isFriend = false
+    
     let db = Firestore.firestore()
 
     override func viewDidLoad() {
@@ -42,19 +44,20 @@ class FriendsViewController: UIViewController {
         tableVIew.dataSource = self
         
         setListener()
-        
+        getMyFriendList { isGet in
+            print(isGet)
+        }
         tableVIew.tableHeaderView?.isHidden = false
-//        let searchController = UISearchController()
-//        navigationItem.searchController = searchController
     
     }
     
     @IBAction func pressSearchButton(_ sender: Any) {
         
         findUserEmail { emailIsFound in
-            if emailIsFound {
+//            if emailIsFound {
                 self.tableVIew.reloadData()
-            }
+//            }
+            
         }
         
     }
@@ -65,7 +68,6 @@ class FriendsViewController: UIViewController {
         case 0:
             selectedIndex = 0
             tableVIew.tableHeaderView?.isHidden = false
-            
             tableVIew.reloadData()
         case 1:
             selectedIndex = 1
@@ -125,7 +127,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedIndex {
         case 0:
             cell.emailLabel.isHidden = false
-            cell.addFriend.isHidden = false
+//            cell.addFriend.isHidden = !isFriend
             cell.setCell(name: users[indexPath.row].name, email: users[indexPath.row].email)
             cell.addFriend.addTarget(self, action: #selector(pressAddFriend(_:)), for: .touchUpInside)
         case 1:
@@ -153,7 +155,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func pressAddFriend(_ sender: UIButton) {
         
-        addFriendRequst()
+        if isFriend {
+            print("Do nothing")
+            showAlert(title: "Fail", message: "你們已經是朋友囉")
+        } else {
+            addFriendRequst()
+        }
         
     }
     
@@ -188,8 +195,20 @@ extension FriendsViewController {
                     
                     print(user)
                     
-                    completion(true)
-                    break
+                    if self.myFriendList.contains(email) {
+                        print("已經是朋友")
+                        self.isFriend = true
+                        completion(false)
+                        break
+                    } else {
+                        
+                       
+                        self.isFriend = false
+                        
+                        completion(true)
+                        break
+                    }
+                    
                 }
                 
             }
@@ -228,9 +247,7 @@ extension FriendsViewController {
                         return
                     }
                     
-//                    if !acceptedState {
-                        self.invitationList.append(from)
-//                    }
+                    self.invitationList.append(from)
                     
                 }
                 
