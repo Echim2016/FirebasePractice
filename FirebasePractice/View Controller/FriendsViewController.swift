@@ -35,6 +35,7 @@ class FriendsViewController: UIViewController {
     var myFriendNameList: [String] = []
     
     var isFriend = false
+    var hasSentRequest = false
     
     let db = Firestore.firestore()
 
@@ -72,7 +73,6 @@ class FriendsViewController: UIViewController {
             selectedIndex = 1
             getInvitations()
             tableVIew.tableHeaderView?.isHidden = true
-            
             tableVIew.reloadData()
         case 2:
             selectedIndex = 2
@@ -156,8 +156,11 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func pressAddFriend(_ sender: UIButton) {
         
-        if isFriend {
-            print("Do nothing")
+        
+        if hasSentRequest {
+            showAlert(title: "Fail", message: "你已經寄過邀請了")
+        } else if isFriend {
+//            print("Do nothing")
             showAlert(title: "Fail", message: "你們已經是朋友囉")
         } else {
             addFriendRequst()
@@ -193,8 +196,7 @@ extension FriendsViewController {
                     
                     let user = User.init(id: id, name: name, email: email)
                     self.users.append(user)
-                    
-                    print(user)
+//                    print(user)
                     
                     if self.myFriendList.contains(email) {
                         print("已經是朋友")
@@ -203,9 +205,21 @@ extension FriendsViewController {
                         break
                     } else {
                         
-                        self.isFriend = false
+                        self.db.collection("Request").whereField("to", isEqualTo: email).whereField("from", isEqualTo: self.ownerEmail).getDocuments { (snapShot, error) in
+                            
+                            print(snapShot?.documents.count)
+                            
+                            if snapShot?.documents.count ?? 0 > 0 {
+                                print("count > 0")
+                                self.hasSentRequest = true
+                                completion(true)
+                                
+                            }
+                            self.isFriend = false
+                            completion(true)
+                            
+                        }
                         
-                        completion(true)
                         break
                     }
                     

@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Ma-YM1">
-                                <rect key="frame" x="0.0" y="31" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="40" width="414" height="719"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="igZ-O2-u2h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -146,7 +146,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                    <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                     <constraints>
                                         <constraint firstItem="G0g-so-dbQ" firstAttribute="top" secondItem="igZ-O2-u2h" secondAttribute="top" constant="3" id="FO3-c3-xZj"/>
                                         <constraint firstItem="G0g-so-dbQ" firstAttribute="leading" secondItem="igZ-O2-u2h" secondAttribute="leading" constant="16" id="RAF-pp-40F"/>
@@ -178,10 +178,14 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21R-B4-esM">
                                                     <rect key="frame" x="348" y="8" width="46" height="30"/>
-                                                    <state key="normal" title="加好友"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <state key="normal" title="加好友">
+                                                        <color key="titleColor" systemColor="systemBlueColor"/>
+                                                    </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0q5-15-Xaz">
                                                     <rect key="frame" x="332" y="46" width="62" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <state key="normal" title="確認好友">
                                                         <color key="titleColor" red="0.96078431369999995" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -209,7 +213,10 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lIR-uI-w9u">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EWh-XP-8WF"/>
+                                </constraints>
                                 <segments>
                                     <segment title="搜尋朋友"/>
                                     <segment title="朋友邀請"/>
