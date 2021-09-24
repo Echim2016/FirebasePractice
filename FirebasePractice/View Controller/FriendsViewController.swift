@@ -46,9 +46,7 @@ class FriendsViewController: UIViewController {
         
         setListener()
         getMyFriendList { isGet in
-            print(isGet)
-            print(self.myFriendList)
-            print(self.myFriendNameList)
+            
         }
         tableVIew.tableHeaderView?.isHidden = false
     
@@ -129,13 +127,14 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             cell.emailLabel.isHidden = false
             cell.addFriend.isHidden = false
+            cell.nameLabel.isHidden = false
             cell.setCell(name: users[indexPath.row].name, email: users[indexPath.row].email)
             cell.addFriend.addTarget(self, action: #selector(pressAddFriend(_:)), for: .touchUpInside)
         case 1:
-            cell.nameLabel.text = invitationList[indexPath.row]
-            cell.emailLabel.isHidden = true
+            cell.emailLabel.text = invitationList[indexPath.row]
+            cell.emailLabel.isHidden = false
             cell.addFriend.isHidden = true
-            
+            cell.nameLabel.isHidden = true
             cell.confirmFriendBtn.isHidden = false
             cell.confirmFriendBtn.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         case 2:
@@ -206,8 +205,6 @@ extension FriendsViewController {
                     } else {
                         
                         self.db.collection("Request").whereField("to", isEqualTo: email).whereField("from", isEqualTo: self.ownerEmail).getDocuments { (snapShot, error) in
-                            
-                            print(snapShot?.documents.count)
                             
                             if snapShot?.documents.count ?? 0 > 0 {
                                 print("count > 0")
@@ -339,17 +336,17 @@ extension FriendsViewController {
                             return
                         }
                         
-                        self.friendList = oldFirendList
-                        self.friendList.append(self.ownerEmail)
-                        if self.friendList.first == "" {
-                            self.friendList.removeFirst()
-                        }
+//                        self.friendList = oldFirendList
+//                        self.friendList.append(self.ownerEmail)
+//                        if self.friendList.first == "" {
+//                            self.friendList.removeFirst()
+//                        }
                         
                         
                         let ref = self.db.collection("Users").document(document.documentID)
                         
                         ref.updateData([
-                            "friend_list" : self.friendList
+                            "friend_list" : FieldValue.arrayUnion([self.ownerEmail])
                         ]) { err in
                             if let err = err {
                                 print("Error updating accpeted request: \(err)")
@@ -368,10 +365,11 @@ extension FriendsViewController {
                 if let querySnapshot = querySnapshot {
                     for document in querySnapshot.documents {
                         
-                        
                         let ref = self.db.collection("Users").document(document.documentID)
                         ref.updateData([
-                            "friend_list" : self.myFriendList
+//                            "friend_list" : self.myFriendList
+                            "friend_list" : FieldValue.arrayUnion(self.myFriendList)
+
                         ]) { err in
                             if let err = err {
                                 print("Error updating accpeted request: \(err)")
@@ -416,37 +414,11 @@ extension FriendsViewController {
                     
                     completion(true)
                     
-//                    self.myFriendList.forEach {  myFriend in
-//
-//                        self.db.collection("Users").whereField("email", isEqualTo: myFriend).getDocuments  {
-//                            (querySnapshot, error) in
-//                            if let querySnapshot = querySnapshot {
-//                                for document in querySnapshot.documents {
-//
-//                                    guard let name = document.get("name") as? String else {
-//                                        print("can't get my old friend list")
-//                                        return
-//                                    }
-//
-//                                    self.myFriendNameList.append(name)
-//                                    print(self.myFriendList)
-//
-//                                }
-//                                completion(true)
-//                            }
-//                        }
-//
-//                    }
-                    
                 }
                 
                 
             }
         }
-        
-        
-        
-        
         
     }
     
